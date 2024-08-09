@@ -1,16 +1,16 @@
-
+const ball = document.querySelector("#ball");
 const mouse = document.querySelector("#mouse");
 const playground = document.querySelector("#playground");
 
 
 
 
-
+let cursorGameX;
+let cursorGameY;
 
 window.addEventListener("mousemove", (ev)=>{
-    let cursorGameY = ev.clientY - playground.offsetTop -7.5;
-    let cursorGameX = ev.clientX - playground.offsetLeft -7.5;
-    console.log(cursorGameX, cursorGameY);
+     cursorGameY = ev.clientY - playground.offsetTop -7.5;
+     cursorGameX = ev.clientX - playground.offsetLeft -7.5;
     if (cursorGameY <= 985 && cursorGameY >= 500){
         mouse.style.top = cursorGameY + "px";
     }
@@ -20,3 +20,41 @@ window.addEventListener("mousemove", (ev)=>{
 
 });
 
+let StoredX;
+let StoredY;
+let Direc_X_Ball =0;
+let Direc_Y_Ball =0;
+let Velocity_Ball=0;
+let x_increment =0;
+let y_increment =0;
+
+
+function Timer() {
+    intervalId = setInterval(() => {
+
+        x_increment = cursorGameX-StoredX;
+        y_increment = cursorGameY-StoredY;
+        distance = Math.sqrt(Math.pow((cursorGameX-StoredX),2) + Math.pow((cursorGameY-StoredY),2));
+        velocity = distance/(1/60);
+       // console.log(velocity);
+        StoredX =cursorGameX;
+        StoredY =cursorGameY;
+
+    if (cursorGameX >= ball.offsetLeft && cursorGameX <= (ball.offsetLeft+15) && cursorGameY >=( ball.offsetTop) && cursorGameY <= (ball.offsetTop+15)){
+    Velocity_Ball =velocity;
+    Direc_X_Ball = x_increment;
+    Direc_Y_Ball = y_increment;
+    }
+    
+    Velocity_Ball= Velocity_Ball * 0.99;
+    ball.style.top = (ball.offsetTop + (Velocity_Ball*Direc_X_Ball)) + "px";
+    ball.style.left = (ball.offsetLeft + (Velocity_Ball*Direc_Y_Ball)) + "px";
+
+        
+}, 1000 / 60.0);
+return intervalId;
+}
+
+
+//Start
+Timer();

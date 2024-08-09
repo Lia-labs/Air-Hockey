@@ -14,6 +14,7 @@ body{
 #ball{
     border-left: 15px solid rgb(204, 0, 255);
     height: 15px;
+    width: 15px;
     position:absolute;
     top: 500px; left: 300px;
 }
