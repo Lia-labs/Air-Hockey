@@ -47,8 +47,26 @@ function Timer() {
     }
     
     Velocity_Ball= Velocity_Ball * 0.99;
-    ball.style.top = (ball.offsetTop + (Velocity_Ball*Direc_Y_Ball)) + "px";
-    ball.style.left = (ball.offsetLeft + (Velocity_Ball*Direc_X_Ball)) + "px";
+    if ( 1000< (ball.offsetTop+15 + (Velocity_Ball*Direc_Y_Ball))){
+        a=  (ball.offsetTop+15 + (Velocity_Ball*Direc_Y_Ball))-1000;
+        ball.style.top = (ball.offsetTop + (Velocity_Ball*Direc_Y_Ball) -a) + "px";
+    }
+    else if (0 > (ball.offsetTop + (Velocity_Ball*Direc_Y_Ball))){
+        a= Math.abs(ball.offsetTop + (Velocity_Ball*Direc_Y_Ball));
+        ball.style.top = (ball.offsetTop + (Velocity_Ball*Direc_Y_Ball)+a) + "px";
+    }
+    else if (600 < (ball.offsetLeft+ 15 + (Velocity_Ball*Direc_X_Ball))){
+        a=  (ball.offsetLeft+15 + (Velocity_Ball*Direc_X_Ball))-600;
+        ball.style.left = (ball.offsetLeft + (Velocity_Ball*Direc_X_Ball)+a) + "px";
+    }
+    else if (0 > (ball.offsetLeft + (Velocity_Ball*Direc_X_Ball))){
+        a= Math.abs(ball.offsetLeft + (Velocity_Ball*Direc_X_Ball));
+        ball.style.left = (ball.offsetLeft + (Velocity_Ball*Direc_X_Ball)+a) + "px";
+    }
+    else{
+        ball.style.top = (ball.offsetTop + (Velocity_Ball*Direc_Y_Ball)) + "px";
+        ball.style.left = (ball.offsetLeft + (Velocity_Ball*Direc_X_Ball)) + "px";
+    }
 
     if (ball.offsetTop <= 0){
         Direc_Y_Ball = Math.abs(Direc_Y_Ball);
