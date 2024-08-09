@@ -39,16 +39,29 @@ function Timer() {
        // console.log(velocity);
         StoredX =cursorGameX;
         StoredY =cursorGameY;
-
-    if (cursorGameX >= ball.offsetLeft && cursorGameX <= (ball.offsetLeft+15) && cursorGameY >=( ball.offsetTop) && cursorGameY <= (ball.offsetTop+15)){
-    Velocity_Ball =velocity;
+        console.log(cursorGameX,mouse.offsetLeft,ball.offsetLeft,"//", cursorGameY,mouse.offsetHeight,ball.offsetTop)
+    if (Math.sqrt(Math.pow(mouse.offsetLeft - (ball.offsetLeft), 2) + Math.pow(mouse.offsetTop- (ball.offsetTop), 2)) < mouse.offsetHeight+ ball.offsetHeight){
+    Velocity_Ball =velocity/60;
     Direc_X_Ball = x_increment;
     Direc_Y_Ball = y_increment;
     }
     
     Velocity_Ball= Velocity_Ball * 0.99;
-    ball.style.top = (ball.offsetTop + (Velocity_Ball*Direc_X_Ball)) + "px";
-    ball.style.left = (ball.offsetLeft + (Velocity_Ball*Direc_Y_Ball)) + "px";
+    ball.style.top = (ball.offsetTop + (Velocity_Ball*Direc_Y_Ball)) + "px";
+    ball.style.left = (ball.offsetLeft + (Velocity_Ball*Direc_X_Ball)) + "px";
+
+    if (ball.offsetTop <= 0){
+        Direc_Y_Ball = Math.abs(Direc_Y_Ball);
+    }
+    if (ball.offsetTop+15 >= 1000){
+        Direc_Y_Ball = -(Math.abs(Direc_Y_Ball));
+    }
+    if (ball.offsetLeft <= 0){
+        Direc_X_Ball = Math.abs(Direc_X_Ball);
+    }
+    if (ball.offsetLeft+15 >= 600){
+        Direc_X_Ball = -(Math.abs(Direc_X_Ball));
+    }
 
         
 }, 1000 / 60.0);

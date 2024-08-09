@@ -14,7 +14,7 @@ body{
 #ball{
     border-left: 15px solid rgb(204, 0, 255);
     height: 15px;
-    width: 15px;
+    border-radius:500px;
     position:absolute;
     top: 500px; left: 300px;
 }
@@ -23,6 +23,7 @@ body{
 #mouse{
     border-left: 15px solid rgb(255, 0, 0);
     height: 15px;
+    border-radius:500px;
     position:absolute;
     top: 750px; left: 300px;
 }
