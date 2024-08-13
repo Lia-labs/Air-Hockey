@@ -38,9 +38,9 @@ let y_increment =0;
 
 function Timer() {
     intervalId = setInterval(() => {
-
-        x_increment = cursorGameX-StoredX;
-        y_increment = cursorGameY-StoredY;
+        distan = Math.sqrt(Math.pow(cursorGameX-StoredX,2)+Math.pow(cursorGameY-StoredY,2));
+        x_increment = (cursorGameX-StoredX)/distan;
+        y_increment = (cursorGameY-StoredY)/distan;
         distance = Math.sqrt(Math.pow((cursorGameX-StoredX),2) + Math.pow((cursorGameY-StoredY),2));
         velocity = distance/(1/60);
        // console.log(velocity);
@@ -48,11 +48,11 @@ function Timer() {
         StoredY =cursorGameY;
         //console.log(cursorGameX,mouse.offsetLeft,ball.offsetLeft,"//", cursorGameY,mouse.offsetHeight,ball.offsetTop)
     if (Math.sqrt(Math.pow((mouse.offsetLeft+25) - (ball.offsetLeft+25), 2) + Math.pow((mouse.offsetTop+25)- (ball.offsetTop+25), 2)) <(( mouse.offsetHeight/2)+(ball.offsetHeight/2))){
-        if (velocity/60 > 3){
-            Velocity_Ball = 3;
+        if (velocity/60 > 50){
+            Velocity_Ball = 50;
         }else{
-            if (velocity/60 + Velocity_Ball > 3){
-                Velocity_Ball = 3;
+            if (velocity/60 + Velocity_Ball > 50){
+                Velocity_Ball = 50;
             }else{
                 Velocity_Ball =velocity/60 + Velocity_Ball;
             }
@@ -62,7 +62,9 @@ function Timer() {
     if (!Direc_X_Ball < 0.01 && !Direc_Y_Ball < 0.01){
         //Direc_X_Ball = x_increment;
         //Direc_Y_Ball = y_increment;
-        vect_normal = [ball.offsetLeft-mouse.offsetLeft,ball.offsetTop-mouse.offsetTop];
+        vect_normal = [(ball.offsetLeft+25)-(mouse.offsetLeft+25),(ball.offsetTop+25)-(mouse.offsetTop+25)];
+       // vect_normal = [(mouse.offsetLeft+25)-(ball.offsetLeft+25),(mouse.offsetTop+25)-(ball.offsetTop+25)];
+
         distance_vect_normal =Math.sqrt(Math.pow(vect_normal[0],2)+Math.pow(vect_normal[1],2));
         vect_normalizated = [vect_normal[0]/distance_vect_normal, vect_normal[1]/distance_vect_normal];
         vect_init =[Direc_X_Ball,Direc_Y_Ball];
